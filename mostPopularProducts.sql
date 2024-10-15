@@ -1,18 +1,11 @@
-SELECT product_name, pcount
+SELECT product_name, prcount
 FROM (
-    SELECT pr.product_name, 
-	SUM(p.count_of_purchases) AS pcount
+	SELECT product_name, SUM(p.count_of_purchases) as prcount
 	FROM products pr
-	JOIN purchases p ON pr.product_id = p.product_id
-	GROUP BY pr.product_id, pr.product_name
-) AS pr_count
-WHERE pcount = (
-    SELECT MAX(pcount) FROM (
-        SELECT SUM(p.count_of_purchases) AS pcount
-        FROM products pr
-        JOIN purchases p ON pr.product_id = p.product_id
-        GROUP BY pr.product_id
-    ) AS popular_product
-);
+	JOIN purchases p ON pr.id = p.product_id
+	GROUP BY product_name	
+) AS prod_count
+ORDER BY prcount DESC
+LIMIT 3;
 
 
