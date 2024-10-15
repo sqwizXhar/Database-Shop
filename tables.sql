@@ -1,21 +1,21 @@
 CREATE TABLE products (
-	product_id SERIAL NOT NULL PRIMARY KEY, 
+	id SERIAL NOT NULL PRIMARY KEY, 
 	product_name VARCHAR(100) NOT NULL, 
 	price DECIMAL(10, 2) NOT NULL,
 	stock INT NOT NUll
 );
 
 CREATE TABLE customers (
-	customer_id SERIAL NOT NULL PRIMARY KEY,
+	id SERIAL NOT NULL PRIMARY KEY,
 	name VARCHAR(20) NOT NULL, 
 	surname VARCHAR(50) NOT NULL,
 	phone_number VARCHAR(18) NOT NULL
 );
 
 CREATE TABLE purchases (
-	purchase_id SERIAL NOT NULL PRIMARY KEY,	
-	customer_id BIGINT REFERENCES customers(customer_id), 
-	product_id BIGINT REFERENCES products(product_id),
+	id SERIAL NOT NULL PRIMARY KEY,	
+	customer_id BIGINT REFERENCES customers(id), 
+	product_id BIGINT REFERENCES products(id),
 	purchase_date TIMESTAMP NOT NULL,
 	count_of_purchases INT NOT NULL
 );
